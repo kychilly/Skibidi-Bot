@@ -36,5 +36,30 @@ public class CommandManager extends ListenerAdapter {
 
         //filler commands
         commandData.add(Commands.slash("welcome", "welcomes user"));
+
+
+        //updates all commands in guilds
+        event.getGuild().updateCommands()
+                .addCommands(commandData)
+                .queue(
+                        success -> System.out.println("✅ New commands registered in " + event.getGuild().getName()),
+                        error -> System.err.println("❌ Failed in " + event.getGuild().getName() + ": " + error.getMessage())
+                );
+    }
+
+    @Override
+    public void onGuildJoin(@NotNull GuildJoinEvent event) {
+        List<CommandData> commandData = new ArrayList<>();
+
+        //filler commands
+        commandData.add(Commands.slash("welcome", "welcomes user"));
+
+        //updates all commands in guilds
+        event.getGuild().updateCommands()
+                .addCommands(commandData)
+                .queue(
+                        success -> System.out.println("✅ New commands registered in " + event.getGuild().getName()),
+                        error -> System.err.println("❌ Failed in " + event.getGuild().getName() + ": " + error.getMessage())
+                );
     }
 }
