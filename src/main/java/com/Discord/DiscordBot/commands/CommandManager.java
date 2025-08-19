@@ -21,21 +21,22 @@ import java.util.concurrent.TimeUnit;
 
 public class CommandManager extends ListenerAdapter {
 
+    private List<CommandData> commandData = new ArrayList<>();
+
     @Override
     public void onSlashCommandInteraction(@NotNull SlashCommandInteractionEvent event) {
         String command = event.getName();
-        if (command.equalsIgnoreCase("tester")) {
-            //add code here
+        if (command.equalsIgnoreCase("skibidi")) {
+            skibidiCommand.execute(event);
         }
 
     }
 
     @Override
     public void onGuildReady(@NotNull GuildReadyEvent event) {
-        List<CommandData> commandData = new ArrayList<>();
 
         //filler commands
-        commandData.add(Commands.slash("welcome", "welcomes user"));
+        commandData.add(Commands.slash("skibidi", "what else can I say?"));
 
 
         //updates all commands in guilds
@@ -49,10 +50,6 @@ public class CommandManager extends ListenerAdapter {
 
     @Override
     public void onGuildJoin(@NotNull GuildJoinEvent event) {
-        List<CommandData> commandData = new ArrayList<>();
-
-        //filler commands
-        commandData.add(Commands.slash("welcome", "welcomes user"));
 
         //updates all commands in guilds
         event.getGuild().updateCommands()
