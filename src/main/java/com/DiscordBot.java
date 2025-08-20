@@ -12,6 +12,7 @@ import net.dv8tion.jda.api.utils.ChunkingFilter;
 import net.dv8tion.jda.api.utils.MemberCachePolicy;
 
 import javax.security.auth.login.LoginException;
+import java.util.Timer;
 
 public class DiscordBot {
     private final ShardManager shardManager;
@@ -40,6 +41,8 @@ public class DiscordBot {
     public static void main(String[] args) {
         try {
             new DiscordBot();
+            Timer timer = new Timer();
+
         } catch (LoginException e) {
             System.out.println("Error: Invalid bot token - check your .env file");
         } catch (Exception e) {

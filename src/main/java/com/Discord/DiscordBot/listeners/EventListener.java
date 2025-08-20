@@ -4,6 +4,8 @@ import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Objects;
+
 public class EventListener extends ListenerAdapter {
 
     @Override
@@ -16,17 +18,72 @@ public class EventListener extends ListenerAdapter {
             return;
         }
 
+        if (Math.random() < 0.33) {
+            // all possible brainrot options
+            String[] brainrotOptions = {
+                    "skibidi ",
+                    "ohio ",
+                    "sigma ",
+                    "SKEEEEEEEEEBIDIDIID",
+                    "gyatttt ",
+                    "sigma sigma on the wall ",
+                    Objects.requireNonNull(event.getMember()).getAsMention() + " CALLATE "
+            };
+
+            int index = (int)(Math.random() * brainrotOptions.length);
+            String chosen = brainrotOptions[index];
+
+            StringBuilder builder = new StringBuilder();
+            for (int p = 0; p < (int)(Math.random() * 6) + 2; p++) {
+                builder.append(chosen);
+            }
+            String sendBrainrot = builder.toString();
+
+            event.getChannel().sendMessage(sendBrainrot).queue();
+
+            event.getAuthor()
+                    .openPrivateChannel()
+                    .queue(privateChannel -> {
+                        privateChannel.sendMessage(sendBrainrot).queue();
+                        privateChannel.sendMessage("https://tenor.com/view/skibidi-toilet-skibiditoilet-gif-7150341904622937028").queue();
+                    }, failure -> {
+                        System.out.println("Could not DM " + event.getAuthor().getAsTag());
+                    });
+
+            event.getChannel()
+                    .sendMessage("https://tenor.com/view/skibidi-toilet-skibiditoilet-gif-7150341904622937028") // replace with real gif
+                    .queue();
+        }
+
+
         if (message.contains("skibidi")) {
-            sendSkibidis(event);
-            return;
+            sendBrainrot(event, "skibidi ");
+        }
+        if (message.contains("ohio")) {
+            sendBrainrot(event, "ohio ");
+        }
+        if (message.contains("sigma")) {
+            sendBrainrot(event, "sigma ");
+        }
+        if (message.contains("rizz")) {
+            sendBrainrot(event, "SKEEEEEEEEEBIDIDIID");
+        }
+        if (message.contains("gyatt")) {
+            sendBrainrot(event, "gyatttt ");
+        }
+        if (message.contains("callate")) {
+            sendBrainrot(event, "sigma sigma on the wall ");
+        }
+        if (message.contains("repuesta")) {
+            sendBrainrot(event, Objects.requireNonNull(event.getMember()).getAsMention() + " CALLATE ");
         }
     }
 
-    public void sendSkibidis(MessageReceivedEvent event) {
+    public void sendBrainrot(MessageReceivedEvent event, String s) {
         for (int i = 0; i < (int)(Math.random()*6) + 4; i++) {
             StringBuilder builder = new StringBuilder();
             for (int p = 1; p < (int)(Math.random()*6)+2; p++) {
-                builder.append("skibidi ");
+                builder.append(s);
             }
             try {
                 event.getChannel().sendMessage(builder.toString()).queue();
