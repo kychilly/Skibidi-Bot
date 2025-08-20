@@ -2,6 +2,7 @@ package com;
 
 import com.Discord.DiscordBot.commands.CommandManager;
 import com.Discord.DiscordBot.listeners.EventListener;
+import com.Discord.DiscordBot.listeners.TriviaListener;
 import io.github.cdimascio.dotenv.Dotenv;
 import net.dv8tion.jda.api.OnlineStatus;
 import net.dv8tion.jda.api.entities.Activity;
@@ -34,6 +35,7 @@ public class DiscordBot {
 
         // Register event listeners
         shardManager.addEventListener(new EventListener());
+        shardManager.addEventListener(new TriviaListener());
         shardManager.addEventListener(new CommandManager());
 
     }

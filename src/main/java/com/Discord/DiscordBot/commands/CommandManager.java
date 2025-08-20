@@ -28,6 +28,8 @@ public class CommandManager extends ListenerAdapter {
         String command = event.getName();
         if (command.equalsIgnoreCase("skibidi")) {
             skibidiCommand.execute(event);
+        } else if (command.equalsIgnoreCase("trivia")) {
+            TriviaCommand.execute(event);
         }
 
     }
@@ -37,6 +39,7 @@ public class CommandManager extends ListenerAdapter {
 
         //filler commands
         commandData.add(Commands.slash("skibidi", "what else can I say?"));
+        commandData.add(Commands.slash("trivia", "toilet trivia time!!!!"));
 
 
         //updates all commands in guilds
