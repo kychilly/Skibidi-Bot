@@ -43,7 +43,7 @@ public class DiscordBot {
     public static void main(String[] args) {
         try {
             new DiscordBot();
-            Timer timer = new Timer();
+            // Timer timer = new Timer();
 
         } catch (LoginException e) {
             System.out.println("Error: Invalid bot token - check your .env file");
