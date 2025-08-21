@@ -67,7 +67,7 @@ public class TriviaCommand {
             new Question("Which faction created advanced healing pods?", "Engineer Cameramen"),
             new Question("Who has screens for eyes?", "TV Man"),
             new Question("Which Titan has the ability to freeze enemies?", "Frost Cameraman"),
-
+            new Question("Sigma sigma on the wall...", "Whos the skibidiest of them all"),
             new Question("What is the main genre of Skibidi Toilet?", "Surreal comedy")
     );
 

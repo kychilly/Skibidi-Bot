@@ -15,6 +15,8 @@ public class TriviaListener extends ListenerAdapter {
     private static final ConcurrentHashMap<Long, TriviaCommand.Question> activeQuestions = new ConcurrentHashMap<>();
     private static final ConcurrentHashMap<Long, ScheduledFuture<?>> activeTimers = new ConcurrentHashMap<>();
 
+    private static final String[] END_MESSAGES = {"Time's up!", "Too slow!", "What the sigma!", "What the skibidi!", "Skibidi sigma toilet!"};
+
     private static final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
 
     public static void setQuestion(MessageChannel channel, TriviaCommand.Question question) {
@@ -67,8 +69,12 @@ public class TriviaListener extends ListenerAdapter {
     public static void triggerTimeout(long channelId, MessageChannel channel) {
         TriviaCommand.Question q = activeQuestions.remove(channelId);
         if (q != null) {
-            channel.sendMessage("⏰ Time’s up! The correct answer was: **" + q.getAnswer() + "**").queue();
+            channel.sendMessage("⏰ " + randomEndMessage() + " The correct answer was: **" + q.getAnswer() + "**").queue();
             activeTimers.remove(channelId);
         }
+    }
+
+    public static String randomEndMessage() {
+        return END_MESSAGES[(int)(Math.random()*END_MESSAGES.length)];
     }
 }
